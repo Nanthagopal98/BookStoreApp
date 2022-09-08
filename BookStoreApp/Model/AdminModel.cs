@@ -10,5 +10,6 @@ namespace Model
         public string AdminEmailID { get; set; }
         public string AdminPhone { get; set; }
         public string Password { get; set; }
+        public string Address { get; set; }
     }
 }

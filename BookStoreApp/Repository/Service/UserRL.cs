@@ -32,13 +32,14 @@ namespace Repository.Service
                 {
                     SqlCommand command = new SqlCommand("dbo.Add_User", sqlConnection);
                     command.CommandType = CommandType.StoredProcedure;
+                    var password = EncryptPassword(model.Password);
 
                     sqlConnection.Open();
-
+                    
                     command.Parameters.AddWithValue("@UserName", model.FullName);
                     command.Parameters.AddWithValue("@Email", model.Email);
                     command.Parameters.AddWithValue("@Phone", model.Phone);
-                    command.Parameters.AddWithValue("@Password", model.Password);
+                    command.Parameters.AddWithValue("@Password", password);
 
 
                     var result = command.ExecuteNonQuery();
@@ -70,11 +71,11 @@ namespace Repository.Service
                 {
                     SqlCommand command = new SqlCommand("User_Login", sqlConnection);
                     command.CommandType = CommandType.StoredProcedure;
-
+                    var password = EncryptPassword(loginModel.Password);
                     sqlConnection.Open();
                     
                     command.Parameters.AddWithValue("@Email", loginModel.Email);
-                    command.Parameters.AddWithValue("@Password", loginModel.Password);
+                    command.Parameters.AddWithValue("@Password", password);
 
                     var result = command.ExecuteScalar();
                     if (result != null)
@@ -168,10 +169,11 @@ namespace Repository.Service
                 {
                     if(password == confirmPassword)
                     {
+                        var encryptPassword = EncryptPassword(password);
                         sqlConnection.Open();
                         SqlCommand command = new SqlCommand("Reset_Password", sqlConnection);
                         command.Parameters.AddWithValue("@Email", email);
-                        command.Parameters.AddWithValue("@Password", password);  
+                        command.Parameters.AddWithValue("@Password", encryptPassword);  
                         command.CommandType = CommandType.StoredProcedure;
                         var result = command.ExecuteNonQuery();
                         if(result > 0)
@@ -192,6 +194,51 @@ namespace Repository.Service
                 {
                     throw new Exception(e.Message);
                 }
+            }
+        }
+
+        public static string EncryptPassword(string Password)
+        {
+            try
+            {
+                if (Password == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    byte[] b = Encoding.ASCII.GetBytes(Password);
+                    string encrypted = Convert.ToBase64String(b);
+                    return encrypted;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static string DecryptedPassword(string encryptedPassword)
+        {
+            byte[] b;
+            string decrypted;
+            try
+            {
+                if (encryptedPassword == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    b = Convert.FromBase64String(encryptedPassword);
+                    decrypted = Encoding.ASCII.GetString(b);
+                    return decrypted;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
     }
