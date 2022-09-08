@@ -109,6 +109,7 @@ namespace Repository.Service
             {
                 Subject = new ClaimsIdentity(new[]
                 {
+                    new Claim(ClaimTypes.Role, "Users"),
                     new Claim(ClaimTypes.Email, email),
                     new Claim("Id", Id.ToString())
                 }),
