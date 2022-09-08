@@ -49,5 +49,16 @@ namespace Manager.Service
                 throw;
             }
         }
+        public bool ResetPassword(string email, string password, string confirmPassword)
+        {
+            try
+            {
+                return iUserRl.ResetPassword(email, password, confirmPassword);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

@@ -132,29 +132,64 @@ namespace Repository.Service
                     string query = "SELECT EmaiL FROM Users WHERE Email = '" + email + "'";
                     SqlCommand command = new SqlCommand(query, sqlConnection);
                     var result = command.ExecuteScalar();
-                    if(result != null)
+                    if (result != null)
                     {
                         string idQuery = "SELECT UserId FROM Users WHERE EmaiL = '" + result + "'";
                         SqlCommand cmd = new SqlCommand(idQuery, sqlConnection);
                         int id = Int32.Parse(cmd.ExecuteScalar().ToString());
-                        //int Id = Int32.Parse(getId);
                         var token = GenerateSecurityToken(result.ToString(), id);
                         MSMQModel msmqModel = new MSMQModel();
                         msmqModel.sendDatatoQueue(token);
-                        return result.ToString();
+                        return token;
                     }
                     else
                     {
                         return null;
                     }
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     throw new Exception(e.Message);
                 }
                 finally
                 {
                     sqlConnection.Close();
+                }
+            }
+        }
+
+        public bool ResetPassword(string email, string password, string confirmPassword)
+        {
+            sqlConnection = new SqlConnection(this.Configuration.GetConnectionString("DBConnection"));
+            using (sqlConnection)
+            {
+                try
+                {
+                    if(password == confirmPassword)
+                    {
+                        sqlConnection.Open();
+                        SqlCommand command = new SqlCommand("Reset_Password", sqlConnection);
+                        command.Parameters.AddWithValue("@Email", email);
+                        command.Parameters.AddWithValue("@Password", password);  
+                        command.CommandType = CommandType.StoredProcedure;
+                        var result = command.ExecuteNonQuery();
+                        if(result > 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch(Exception e)
+                {
+                    throw new Exception(e.Message);
                 }
             }
         }

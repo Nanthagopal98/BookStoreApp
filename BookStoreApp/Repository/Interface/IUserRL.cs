@@ -10,5 +10,6 @@ namespace Repository.Interface
         public bool Registration(RegisterModel model);
         public string UserLogin(LoginModel loginModel);
         public string ForgetPassword(string email);
+        public bool ResetPassword(string email, string password, string confirmPassword);
     }
 }
