@@ -177,5 +177,31 @@ namespace Repository.Service
                 this.connection.Close();
             }
         }
+
+        public bool DeleteBook(int bookId)
+        {
+            try
+            {
+                connection = new SqlConnection(this.Configuration.GetConnectionString("DBConnection"));
+                this.connection.Open();
+                SqlCommand command = new SqlCommand("Delete_Book", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@BookId", bookId);
+                var result = command.ExecuteNonQuery();
+                if(result > 0)
+                {
+                    return true;
+                }
+                else { return false; }
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+        }
     }
 }

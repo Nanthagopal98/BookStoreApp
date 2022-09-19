@@ -99,5 +99,25 @@ namespace BookStoreApp.Controllers
                 throw;
             }
         }
+
+        [Authorize(Roles =Role.Admin)]
+        [HttpDelete]
+        [Route("DeleteBook")]
+        public IActionResult DeleteBook(int bookId)
+        {
+            try
+            {
+                var result = bookBL.DeleteBook(bookId);
+                if(result != false)
+                {
+                    return Ok(new { success = true, message = "Book Deleted Successfully" });
+                }
+                return BadRequest(new { success = false, message = "Failed To Delete" });
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 }

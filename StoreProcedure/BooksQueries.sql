@@ -51,3 +51,11 @@ UPDATE Books SET BookName = @BookName, AuthorName = @AuthorName, Rating = @Ratin
 					TotalRating = @TotalRating, DiscountPrice = @DiscountPrice, ActualPrice = @ActualPrice,
 					Description = @Description, BookImage = @BookImage, BookQuantity = @BookQuantity  WHERE BookId = @BookId
 END
+
+
+GO
+CREATE PROCEDURE [dbo].[Delete_Book] @BookId INT
+AS
+BEGIN
+DELETE FROM Books WHERE BookId = @BookId
+END

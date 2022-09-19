@@ -59,5 +59,16 @@ namespace Manager.Service
                 throw;
             }
         }
+        public bool DeleteBook(int bookId)
+        {
+            try
+            {
+                return bookRL.DeleteBook(bookId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

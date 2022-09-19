@@ -11,5 +11,6 @@ namespace Manager.Interface
         public List<BookModel> GetAllBook();
         public BookModel GetBookById(int bookId);
         public bool UpdateBook(BookModel model);
+        public bool DeleteBook(int bookId);
     }
 }
