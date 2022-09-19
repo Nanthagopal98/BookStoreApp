@@ -26,5 +26,16 @@ namespace Manager.Service
                 throw;
             }
         }
+        public List<BookModel> GetAllBook()
+        {
+            try
+            {
+                return bookRL.GetAllBook();
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

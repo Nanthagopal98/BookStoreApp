@@ -55,11 +55,39 @@ namespace Repository.Service
                 this.connection.Close();
             }
         }
-        public bool GetAllBook(int bookId)
+        public List<BookModel> GetAllBook()
         {
+            List<BookModel> bookList = new List<BookModel>();
             try
             {
-
+                connection = new SqlConnection(this.Configuration.GetConnectionString("DBConnection"));
+                connection.Open();
+                SqlCommand command = new SqlCommand("Get_All_Book", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader data = command.ExecuteReader();
+                if (data.HasRows) 
+                {
+                    while (data.Read())
+                    {
+                        BookModel bookModel = new BookModel();
+                        bookModel.BookId = Convert.ToInt32(data["BookId"]);
+                        bookModel.BookName = data["BookName"].ToString();
+                        bookModel.AuthorName = data["AuthorName"].ToString();
+                        bookModel.Rating = data["Rating"].ToString();
+                        bookModel.TotalRating = Convert.ToInt32(data["TotalRating"]);
+                        bookModel.DiscountPrice = data["DiscountPrice"].ToString();
+                        bookModel.ActualPrice = data["ActualPrice"].ToString();
+                        bookModel.Description = data["Description"].ToString();
+                        bookModel.BookImage = data["BookImage"].ToString();
+                        bookModel.BookQuantity = Convert.ToInt32(data["BookQuantity"]);
+                        bookList.Add(bookModel);
+                    }
+                    return bookList;
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch(Exception e)
             {

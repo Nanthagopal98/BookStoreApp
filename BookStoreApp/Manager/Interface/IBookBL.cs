@@ -8,5 +8,6 @@ namespace Manager.Interface
     public interface IBookBL
     {
         public bool AddBook(BookModel model);
+        public List<BookModel> GetAllBook();
     }
 }

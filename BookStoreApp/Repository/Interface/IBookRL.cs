@@ -8,6 +8,6 @@ namespace Repository.Interface
     public interface IBookRL
     {
         public bool AddBook(BookModel model);
-        public bool GetAllBook(int bookId);
+        public List<BookModel> GetAllBook();
     }
 }

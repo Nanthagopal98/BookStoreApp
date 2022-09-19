@@ -37,5 +37,25 @@ namespace BookStoreApp.Controllers
                 throw;
             }
         }
+
+        [Authorize]
+        [HttpGet]
+        [Route("GetAllBooks")]
+        public IActionResult GetAllBooks()
+        {
+            try
+            {
+                var result = bookBL.GetAllBook();
+                if(result != null)
+                {
+                    return Ok(new { succes = true, message = "Get Books SuccessFul", data = result});
+                }
+                return BadRequest(new { success = false, message = "Get All Book Falied" });
+            }
+            catch(System.Exception)
+            {
+                throw;
+            }
+        }
     }
 }
