@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Reflection;
 using System.Text;
 
 namespace Repository.Service
@@ -136,6 +137,44 @@ namespace Repository.Service
             catch(Exception e)
             {
                 throw new Exception(e.Message);
+            }
+        }
+
+        public bool UpdateBook(BookModel model)
+        {
+            try
+            {
+                connection = new SqlConnection(this.Configuration.GetConnectionString("DBConnection"));
+                SqlCommand command = new SqlCommand("Update_Book", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                connection.Open();
+                command.Parameters.AddWithValue("@BookId", model.BookId);
+                command.Parameters.AddWithValue("@BookName", model.BookName);
+                command.Parameters.AddWithValue("@AuthorName", model.AuthorName);
+                command.Parameters.AddWithValue("@Rating", model.Rating);
+                command.Parameters.AddWithValue("@TotalRating", model.TotalRating);
+                command.Parameters.AddWithValue("@DiscountPrice", model.DiscountPrice);
+                command.Parameters.AddWithValue("@ActualPrice", model.ActualPrice);
+                command.Parameters.AddWithValue("@Description", model.Description);
+                command.Parameters.AddWithValue("@BookImage", model.BookImage);
+                command.Parameters.AddWithValue("@BookQuantity", model.BookQuantity);
+                var result =  command.ExecuteNonQuery();
+                if(result > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
             }
         }
     }

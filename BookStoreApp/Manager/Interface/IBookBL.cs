@@ -10,5 +10,6 @@ namespace Manager.Interface
         public bool AddBook(BookModel model);
         public List<BookModel> GetAllBook();
         public BookModel GetBookById(int bookId);
+        public bool UpdateBook(BookModel model);
     }
 }

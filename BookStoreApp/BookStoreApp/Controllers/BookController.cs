@@ -78,5 +78,26 @@ namespace BookStoreApp.Controllers
                 throw;
             }
         }
+
+        [Authorize(Roles = Role.Admin)]
+        [HttpPut]
+        [Route("UpdateBook")]
+        public IActionResult UpdateBook(BookModel model)
+        {
+            try
+            {
+                var result = bookBL.UpdateBook(model);
+                if (result != false)
+                {
+                    return Ok(new { success = true, message = "Book Update Successful" });
+                }
+                return BadRequest(new { success = false, message = "Failed to Update Book" });
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

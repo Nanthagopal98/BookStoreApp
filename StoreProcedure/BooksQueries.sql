@@ -39,3 +39,15 @@ AS
 BEGIN
 SELECT * FROM Books WHERE BookId = @BookId
 END
+
+
+GO
+CREATE PROCEDURE [dbo].[Update_Book] @BookId INT, @BookName  VARCHAR(250), @AuthorName VARCHAR(250), @Rating VARCHAR(250),
+					@TotalRating  INT, @DiscountPrice VARCHAR(250), @ActualPrice  VARCHAR(250),
+					@Description  VARCHAR(250), @BookImage  VARCHAR(250), @BookQuantity  INT
+AS 
+BEGIN
+UPDATE Books SET BookName = @BookName, AuthorName = @AuthorName, Rating = @Rating,
+					TotalRating = @TotalRating, DiscountPrice = @DiscountPrice, ActualPrice = @ActualPrice,
+					Description = @Description, BookImage = @BookImage, BookQuantity = @BookQuantity  WHERE BookId = @BookId
+END

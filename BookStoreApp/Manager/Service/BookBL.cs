@@ -48,5 +48,16 @@ namespace Manager.Service
                 throw;
             }
         }
+        public bool UpdateBook(BookModel model)
+        {
+            try
+            {
+                return bookRL.UpdateBook(model);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }
