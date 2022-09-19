@@ -25,3 +25,10 @@ BEGIN
 INSERT INTO Books VALUES (@BookName, @AuthorName, @Rating,@TotalRating, @DiscountPrice, @ActualPrice,
 					@Description, @BookImage, @BookQuantity)
 END
+
+GO 
+CREATE PROCEDURE [dbo].[Get_All_Book]
+AS
+BEGIN
+SELECT * FROM Books
+END
