@@ -1,5 +1,7 @@
 use BookStore
 
+CREATE DATABASE BookStore
+
 CREATE TABLE Admin(
 AdminId INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 AdminName VARCHAR(100),

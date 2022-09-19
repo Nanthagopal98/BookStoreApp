@@ -62,7 +62,7 @@ namespace BookStoreApp.Controllers
 
         [HttpPost]
         [Route("Forget")]
-        public IActionResult ForgetPassword([FromBody] string email)
+        public IActionResult ForgetPassword(string email)
         {
             try
             {

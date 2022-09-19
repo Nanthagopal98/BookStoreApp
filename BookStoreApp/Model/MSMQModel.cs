@@ -29,7 +29,7 @@ namespace Model
         {
             var msg = messageQueue.EndReceive(e.AsyncResult);
             string Token = msg.Body.ToString();
-            string url = $"Fundoo Notes Reset Password: <a href=http://localhost:4200/reset/{Token}> Click Here</a>";
+            string url = $"Book store Reset Password: <a href=http://localhost:4200/reset/{Token}> Click Here</a>";
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress("nantha.test123@gmail.com");
             mail.To.Add("nantha.test123@gmail.com");
@@ -37,7 +37,7 @@ namespace Model
 
             mail.IsBodyHtml = true;
             string htmlBody;
-            mail.Subject = "FundooNote Reset Link";
+            mail.Subject = "Book store Reset Link";
             mail.Body = "<body><p>Dear Nantha,<br><br>" +
                 "We have sent you a link for resetting your password.<br>" +
                 "Please copy it and paste in your swagger authorization.</body>" + url;
@@ -50,7 +50,7 @@ namespace Model
             var SMTP = new SmtpClient("smtp.gmail.com")
             {
                 Port = 587,
-                Credentials = new NetworkCredential("nantha.test123@gmail.com", "fvamiekeeynqoobe"),
+                Credentials = new NetworkCredential("nantha.test123@gmail.com", "iebhgssqyywnnogn"),
                 EnableSsl = true,
             };
             SMTP.Send(mail);

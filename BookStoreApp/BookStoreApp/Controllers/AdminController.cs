@@ -25,11 +25,11 @@ namespace BookStoreApp.Controllers
                 var result = this.iAdminBL.AdminLogin(loginModel);
                 if (result != null)
                 {
-                    return Ok(new { success = true, message = "User Logged in", data = result });
+                    return Ok(new { success = true, message = "Admin Logged in", data = result });
                 }
                 else
                 {
-                    return BadRequest(new { success = false, message = "Failed to login" });
+                    return BadRequest(new { success = false, message = "Admin login Failed"});
                 }
             }
             catch (System.Exception)
