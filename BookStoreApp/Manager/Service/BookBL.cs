@@ -37,5 +37,16 @@ namespace Manager.Service
                 throw;
             }
         }
+        public BookModel GetBookById(int bookId)
+        {
+            try
+            {
+                return bookRL.GetBookById(bookId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

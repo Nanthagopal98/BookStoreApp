@@ -57,5 +57,26 @@ namespace BookStoreApp.Controllers
                 throw;
             }
         }
+
+        [Authorize]
+        [HttpGet]
+        [Route("GetBookById")]
+        public IActionResult GetBookById(int bookId)
+        {
+            try
+            {
+                var result = bookBL.GetBookById(bookId);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "Get Book By Id Successful", data = result });
+                }
+                return BadRequest(new { success = false, message = "Failed to Get Book By ID" });
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

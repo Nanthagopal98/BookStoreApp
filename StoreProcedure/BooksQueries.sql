@@ -32,3 +32,10 @@ AS
 BEGIN
 SELECT * FROM Books
 END
+
+GO
+CREATE PROCEDURE [dbo].[Get_Book_By_Id] @BookId INT
+AS 
+BEGIN
+SELECT * FROM Books WHERE BookId = @BookId
+END

@@ -98,5 +98,45 @@ namespace Repository.Service
                 this.connection.Close();   
             }
         }
+        public BookModel GetBookById(int bookId)
+        {
+            try
+            {
+                connection = new SqlConnection(this.Configuration.GetConnectionString("DBConnection"));
+                SqlCommand cmd = new SqlCommand("Get_Book_By_Id", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                connection.Open();
+                cmd.Parameters.AddWithValue("@BookId", bookId);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    BookModel bookModel = new BookModel();
+                    while (reader.Read())
+                    {
+                        
+                        bookModel.BookId = Convert.ToInt32(reader["BookId"]);
+                        bookModel.BookName = reader["BookName"].ToString();
+                        bookModel.AuthorName = reader["AuthorName"].ToString();
+                        bookModel.Rating = reader["Rating"].ToString();
+                        bookModel.TotalRating = Convert.ToInt32(reader["TotalRating"]);
+                        bookModel.DiscountPrice = reader["DiscountPrice"].ToString();
+                        bookModel.ActualPrice = reader["ActualPrice"].ToString();
+                        bookModel.Description = reader["Description"].ToString();
+                        bookModel.BookImage = reader["BookImage"].ToString();
+                        bookModel.BookQuantity = Convert.ToInt32(reader["BookQuantity"]);
+                    }
+                    return bookModel;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
