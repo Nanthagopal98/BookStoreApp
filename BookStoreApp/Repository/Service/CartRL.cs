@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Text;
 
 namespace Repository.Service
@@ -185,6 +186,43 @@ namespace Repository.Service
             }
             finally
             {
+                this.connection.Close();
+            }
+        }
+
+        public List<CartGet> GetCart(int userId)
+        {
+            List<CartGet> getCart = new List<CartGet>();
+            try
+            {
+                connection = new SqlConnection(this.configuration.GetConnectionString("DBConnection"));
+                connection.Open();
+                SqlCommand command = new SqlCommand("Get_Procedure", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@UserId", userId);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        CartGet model = new CartGet();
+                        model.CartId = Convert.ToInt32(reader["CartId"]);
+                        model.BookId = Convert.ToInt32(reader["BookId"]);
+                        model.Quantity = Convert.ToInt32(reader["Quantity"]);
+                        getCart.Add(model);
+                    }
+                    return getCart;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally{
                 this.connection.Close();
             }
         }

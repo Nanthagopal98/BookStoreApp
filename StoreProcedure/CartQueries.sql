@@ -32,3 +32,10 @@ AS
 BEGIN
 DELETE FROM Cart WHERE CartId = @CartId AND UserId = @UserId
 END
+
+GO
+CREATE PROCEDURE [dbo].[Get_Procedure] @UserId INT
+AS
+BEGIN
+SELECT * FROM Cart WHERE UserId = @UserId
+END

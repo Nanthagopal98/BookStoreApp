@@ -50,5 +50,16 @@ namespace Manager.Service
                 throw;
             }
         }
+        public List<CartGet> GetCart(int userId)
+        {
+            try
+            {
+                return cartRL.GetCart(userId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

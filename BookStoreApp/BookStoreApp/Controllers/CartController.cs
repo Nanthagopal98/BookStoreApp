@@ -6,6 +6,7 @@ using Model;
 using System.Linq;
 using System;
 using System.Security.Claims;
+using System.Collections.Generic;
 
 namespace BookStoreApp.Controllers
 {
@@ -76,6 +77,25 @@ namespace BookStoreApp.Controllers
                 return BadRequest(new { success = false, message = "Cart Delete Failed" });
             }
             catch(System.Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpGet]
+        [Route("GetAllCart")]
+        public IActionResult GetCart()
+        {
+            try {
+                var UserId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "Id").Value);
+                var result = CartBL.GetCart(UserId);
+                if (result != null)
+                {
+                    return Ok(new { succcess = true, message = "Get Cart Success", data = result });
+                }
+                return BadRequest(new { success = false, message = "Get Cart Failed" });
+            }
+            catch (System.Exception)
             {
                 throw;
             }
