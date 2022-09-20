@@ -82,5 +82,55 @@ namespace Repository.Service
                 this.connection.Close();
             }
         }
+
+        public bool UpdateCart(int userId, CartUpdateModel cartUpdateModel)
+        {
+            try
+            {
+                connection = new SqlConnection(this.configuration.GetConnectionString("DBConnection"));
+                connection.Open();
+                string query = "SELECT * FROM Cart WHERE UserId =" + userId;
+                SqlCommand command = new SqlCommand(query, connection);
+                command.CommandType = CommandType.Text;
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        var findCart = Convert.ToInt32(reader["CartId"]);
+                        if(findCart == cartUpdateModel.CartId)
+                        {
+                            reader.Close();
+                            SqlCommand cmd = new SqlCommand("Update_Cart", connection);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@Quantity", cartUpdateModel.Quantity);
+                            cmd.Parameters.AddWithValue("@CartId", cartUpdateModel.CartId);
+                            var result = cmd.ExecuteNonQuery();
+                            if(result > 0)
+                            {
+                                return true;
+                            }
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                    return false;
+                }               
+                else
+                {
+                    return false;
+                }
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+        }
     }
 }

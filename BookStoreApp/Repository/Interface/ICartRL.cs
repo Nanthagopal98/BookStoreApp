@@ -8,5 +8,6 @@ namespace Repository.Interface
     public interface ICartRL
     {
         public bool AddToCart(int UserId, CartModel cartModel);
+        public bool UpdateCart(int userId, CartUpdateModel cartUpdateModel);
     }
 }

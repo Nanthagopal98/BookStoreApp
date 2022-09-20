@@ -18,3 +18,10 @@ AS
 BEGIN
 INSERT INTO Cart VALUES(@Quantity, @UserId, @BookId)
 END
+
+GO
+ALTER PROCEDURE [dbo].[Update_Cart] @Quantity INT, @CartId INT
+AS
+BEGIN
+UPDATE Cart SET Quantity = @Quantity WHERE CartId = @CartId
+END

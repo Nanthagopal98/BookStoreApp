@@ -11,6 +11,7 @@ namespace BookStoreApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CartController : ControllerBase
     {
         public ICartBL CartBL;
@@ -19,7 +20,7 @@ namespace BookStoreApp.Controllers
             CartBL = cartBL;
         }
 
-        [Authorize]
+        
         [HttpPost]
         [Route("AddToCart")]
         public IActionResult AddToCart(CartModel cartModel)
@@ -33,6 +34,26 @@ namespace BookStoreApp.Controllers
                     return Ok(new { success = true, message = "Added To Cart" });
                 }
                 return BadRequest(new { success = false, meassage = "Failed To add To Cart" });
+            }
+            catch(System.Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPut]
+        [Route("UpdateCart")]
+        public IActionResult UpdateCart(CartUpdateModel cartUpdateModel)
+        {
+            try
+            {
+                var UserId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "Id").Value);
+                var result = CartBL.UpdateCart(UserId, cartUpdateModel);
+                if(result != false)
+                {
+                    return Ok(new { success = true, message = "Cart Updated" });
+                }
+                return BadRequest(new { success = true, messsage = "Cart Update Failed" });
             }
             catch(System.Exception)
             {

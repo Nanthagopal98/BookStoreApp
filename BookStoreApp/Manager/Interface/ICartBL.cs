@@ -8,5 +8,6 @@ namespace Manager.Interface
     public interface ICartBL
     {
         public bool AddToCart(int UserId, CartModel cartModel);
+        public bool UpdateCart(int userId, CartUpdateModel cartUpdateModel);
     }
 }

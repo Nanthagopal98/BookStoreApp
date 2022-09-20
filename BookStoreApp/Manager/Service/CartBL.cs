@@ -26,5 +26,17 @@ namespace Manager.Service
                 throw;
             }
         }
+
+        public bool UpdateCart(int userId, CartUpdateModel cartUpdateModel)
+        {
+            try
+            {
+                return cartRL.UpdateCart(userId, cartUpdateModel);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }
