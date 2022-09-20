@@ -41,6 +41,18 @@ namespace Manager.Service
             }
         }
 
+        public List<WishListGetModel> GetWishList(int UserId)
+        {
+            try
+            {
+                return wishListRL.GetWishList(UserId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
 
     }
 }

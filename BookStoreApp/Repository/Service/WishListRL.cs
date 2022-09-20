@@ -101,5 +101,39 @@ namespace Repository.Service
                 throw new Exception(e.Message);
             }
         }
+
+        public List<WishListGetModel> GetWishList(int UserId)
+        {
+            try
+            {
+                List<WishListGetModel> getList = new List<WishListGetModel>();
+                connection = new SqlConnection(this.Configuration.GetConnectionString("DBConnection"));
+                connection.Open();
+                SqlCommand command = new SqlCommand("Get_Procedure_WishList", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@UserId", UserId);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        WishListGetModel model = new WishListGetModel();
+                        model.WishListId = Convert.ToInt32(reader["WishListId"]);
+                        model.UserId = Convert.ToInt32(reader["UserId"]);
+                        model.BookId = Convert.ToInt32(reader["BookId"]);
+                        getList.Add(model);
+                    }
+                    return getList;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

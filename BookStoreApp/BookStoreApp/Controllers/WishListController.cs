@@ -5,6 +5,7 @@ using Model;
 using System.Linq;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
 
 namespace BookStoreApp.Controllers
 {
@@ -53,6 +54,26 @@ namespace BookStoreApp.Controllers
                     return Ok(new { success = true, message = "Deleted Successfully" });
                 }
                 return BadRequest(new { success = false, message = "Failed To Delete Wishlist Book" });
+            }
+            catch(System.Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpGet]
+        [Route("GetWishList")]
+        public IActionResult GetWishList()
+        {
+            try
+            {
+                var UserId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "Id").Value);
+                var result = wishListBL.GetWishList(UserId);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "Get WishList", data = result });
+                }
+                return BadRequest(new { success = false, message = "Failed To Get Wishlist Book" });
             }
             catch(System.Exception)
             {

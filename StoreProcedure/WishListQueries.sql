@@ -21,3 +21,10 @@ AS
 BEGIN
 DELETE FROM WishList WHERE WishListId = @WishListId AND UserId = @UserId
 END
+
+GO
+CREATE PROCEDURE [dbo].[Get_Procedure_WishList] @UserId INT
+AS 
+BEGIN
+SELECT * FROM WishList WHERE UserId = @UserId
+END
