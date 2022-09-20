@@ -36,7 +36,7 @@ namespace Model
             mail.Subject = "subject";
 
             mail.IsBodyHtml = true;
-            string htmlBody;
+            //string htmlBody;
             mail.Subject = "Book store Reset Link";
             mail.Body = "<body><p>Dear Nantha,<br><br>" +
                 "We have sent you a link for resetting your password.<br>" +

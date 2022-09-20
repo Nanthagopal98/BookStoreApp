@@ -27,7 +27,7 @@ namespace Repository.Service
             {
                 connection = new SqlConnection(this.configuration.GetConnectionString("DBConnection"));
                 connection.Open();
-                string query = "SELECT BookId FROM Cart";
+                string query = "SELECT BookId FROM Cart WHERE UserId ="+UserId;
                 SqlCommand  cmd = new SqlCommand(query, connection);
                 cmd.CommandType = CommandType.Text;
                 SqlDataReader reader = cmd.ExecuteReader();
