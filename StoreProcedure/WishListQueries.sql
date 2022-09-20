@@ -13,3 +13,11 @@ AS
 BEGIN
 INSERT INTO WishList VALUES (@UserId,@BookId)
 END
+
+
+GO
+CREATE PROCEDURE [dbo].[Delete_Book_WishList] @WishListId INT , @UserId INT
+AS
+BEGIN
+DELETE FROM WishList WHERE WishListId = @WishListId AND UserId = @UserId
+END

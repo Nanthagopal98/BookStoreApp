@@ -39,5 +39,25 @@ namespace BookStoreApp.Controllers
                 throw;
             }
         }
+
+        [HttpDelete]
+        [Route("DeleteWishList")]
+        public IActionResult DeleteWishList(int wishListId)
+        {
+            try
+            {
+                var UserId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "Id").Value);
+                var result = wishListBL.DeleteWishList(UserId, wishListId);
+                if(result != false)
+                {
+                    return Ok(new { success = true, message = "Deleted Successfully" });
+                }
+                return BadRequest(new { success = false, message = "Failed To Delete Wishlist Book" });
+            }
+            catch(System.Exception)
+            {
+                throw;
+            }
+        }
     }
 }

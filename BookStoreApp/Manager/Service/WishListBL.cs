@@ -28,6 +28,19 @@ namespace Manager.Service
                 throw;
             }
         }
-        
+
+        public bool DeleteWishList(int userId, int wishListId)
+        {
+            try
+            {
+                return wishListRL.DeleteWishList(userId, wishListId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+
     }
 }

@@ -8,5 +8,6 @@ namespace Repository.Interface
     public interface IWishListRL
     {
         public bool AddToWishList(int userId, WishListModelCreate wishListModel);
+        public bool DeleteWishList(int userId, int wishListId);
     }
 }

@@ -78,5 +78,28 @@ namespace Repository.Service
                 this.connection.Close();
             }
         }
+
+        public bool DeleteWishList(int userId, int wishListId)
+        {
+            try
+            {
+                connection = new SqlConnection(this.Configuration.GetConnectionString("DBConnection"));
+                connection.Open();
+                SqlCommand command = new SqlCommand("Delete_Book_WishList", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@WishListId", wishListId);
+                command.Parameters.AddWithValue("@UserId", userId);
+                var result = command.ExecuteNonQuery();
+                if(result > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
