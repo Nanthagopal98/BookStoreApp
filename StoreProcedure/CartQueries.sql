@@ -20,8 +20,15 @@ INSERT INTO Cart VALUES(@Quantity, @UserId, @BookId)
 END
 
 GO
-ALTER PROCEDURE [dbo].[Update_Cart] @Quantity INT, @CartId INT
+ALTER PROCEDURE [dbo].[Update_Cart] @Quantity INT, @CartId INT, @UserId INT
 AS
 BEGIN
-UPDATE Cart SET Quantity = @Quantity WHERE CartId = @CartId
+UPDATE Cart SET Quantity = @Quantity WHERE CartId = @CartId AND UserId = @UserId
+END
+
+GO
+CREATE PROCEDURE [dbO].[Delete_Cart] @CartId INT, @UserId INT
+AS
+BEGIN
+DELETE FROM Cart WHERE CartId = @CartId AND UserId = @UserId
 END

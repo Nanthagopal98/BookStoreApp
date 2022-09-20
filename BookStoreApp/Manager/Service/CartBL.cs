@@ -38,5 +38,17 @@ namespace Manager.Service
                 throw;
             }
         }
+
+        public bool DeleteCart(int cartId, int userId)
+        {
+            try
+            {
+                return cartRL.DeleteCart(cartId, userId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

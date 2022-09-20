@@ -53,7 +53,27 @@ namespace BookStoreApp.Controllers
                 {
                     return Ok(new { success = true, message = "Cart Updated" });
                 }
-                return BadRequest(new { success = true, messsage = "Cart Update Failed" });
+                return BadRequest(new { success = false, messsage = "Cart Update Failed" });
+            }
+            catch(System.Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpDelete]
+        [Route("DeleteCart")]
+        public IActionResult DeleteCart(int cartId)
+        {
+            try
+            {
+                var UserId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "Id").Value);
+                var result = CartBL.DeleteCart(cartId, UserId);
+                if(result != false)
+                {
+                    return Ok(new { succcess = true, message = "Cart Delete Success" });
+                }
+                return BadRequest(new { success = false, message = "Cart Delete Failed" });
             }
             catch(System.Exception)
             {

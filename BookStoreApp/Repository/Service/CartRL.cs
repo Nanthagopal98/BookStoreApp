@@ -83,7 +83,7 @@ namespace Repository.Service
             }
         }
 
-        public bool UpdateCart(int userId, CartUpdateModel cartUpdateModel)
+        /*public bool UpdateCart(int userId, CartUpdateModel cartUpdateModel)
         {
             try
             {
@@ -122,6 +122,62 @@ namespace Repository.Service
                 {
                     return false;
                 }
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+        }*/
+
+        public bool UpdateCart(int userId, CartUpdateModel cartUpdateModel)
+        {
+            try
+            {
+                connection = new SqlConnection(this.configuration.GetConnectionString("DBConnection"));
+                connection.Open();
+                SqlCommand command = new SqlCommand("Update_Cart", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Quantity", cartUpdateModel.Quantity);
+                command.Parameters.AddWithValue("@CartId", cartUpdateModel.CartId);
+                command.Parameters.AddWithValue("@UserId", userId);
+                var result = command.ExecuteNonQuery();
+
+                if (result > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+        }
+
+        public bool DeleteCart(int cartId, int userId)
+        {
+            try
+            {
+                connection = new SqlConnection(this.configuration.GetConnectionString("DBConnection"));
+                connection.Open();
+                SqlCommand cmd = new SqlCommand("Delete_Cart", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@CartId", cartId);
+                cmd.Parameters.AddWithValue("@UserId", userId);
+                var result = cmd.ExecuteNonQuery();
+                if(result > 0)
+                {
+                    return true;
+                }
+                return false;
             }
             catch(Exception e)
             {

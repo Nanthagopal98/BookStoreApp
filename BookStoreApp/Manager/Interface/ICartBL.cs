@@ -9,5 +9,6 @@ namespace Manager.Interface
     {
         public bool AddToCart(int UserId, CartModel cartModel);
         public bool UpdateCart(int userId, CartUpdateModel cartUpdateModel);
+        public bool DeleteCart(int cartId, int userId);
     }
 }
