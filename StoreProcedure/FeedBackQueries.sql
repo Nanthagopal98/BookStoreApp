@@ -1,0 +1,17 @@
+
+CREATE TABLE FeedBack(
+FeedBackId INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+Rating FLOAT NOT NULL,
+Comment VARCHAR(MAX) NOT NULL,
+UserId INT FOREIGN KEY (UserId) REFERENCES Users(UserId),
+BookId INT FOREIGN KEY (BookId) REFERENCES Books(BookId)
+)
+
+SELECT * FROM FeedBack
+
+GO
+CREATE PROCEDURE Add_FeedBack @Rating FLOAT, @Comment VARCHAR(MAX), @BookId INT, @UserId INT
+AS
+BEGIN
+INSERT INTO FeedBack VALUES(@Rating, @Comment, @UserId, @BookId)
+END

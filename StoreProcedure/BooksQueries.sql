@@ -13,6 +13,8 @@ BookImage  VARCHAR(250),
 BookQuantity  INT
 )
 
+SELECT * FROM Books
+UPDATE Books SET BookQuantity = 1000 WHERE BookId = 1
 
 SELECT * FROM Books
 
