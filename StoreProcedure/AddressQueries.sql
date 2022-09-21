@@ -30,3 +30,18 @@ AS
 BEGIN
 INSERT INTO Address VALUES (@Address, @City, @State, @TypeId, @UserId)
 END
+
+GO
+ALTER PROCEDURE Update_Address @Address VARCHAR(250), @City VARCHAR (250), @State VARCHAR(250), @TypeId INT, @UserId INT, @AddressId INT
+AS
+BEGIN
+UPDATE Address SET Address = @Address, City = @City, State = @State, TypeId = @TypeId WHERE UserId = @UserId AND @AddressId = AddressId
+END
+
+
+GO 
+CREATE PROCEDURE Get_Address @UserId INT
+AS 
+BEGIN
+SELECT * FROM Address WHERE UserId = @UserId
+END

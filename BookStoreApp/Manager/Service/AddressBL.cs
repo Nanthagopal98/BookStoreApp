@@ -26,5 +26,27 @@ namespace Manager.Service
                 throw;
             }
         }
+        public bool UpdateAddress(AddressUpdateModel addressModel, int userId)
+        {
+            try
+            {
+                return addressRL.UpdateAddress(addressModel, userId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public IEnumerable<AddressUpdateModel> GetAllAddress(int userId)
+        {
+            try
+            {
+                return addressRL.GetAllAddress(userId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }
