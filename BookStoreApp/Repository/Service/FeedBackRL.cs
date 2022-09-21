@@ -39,13 +39,53 @@ namespace Repository.Service
                 }
                 return false;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
             finally
             {
                 connection.Close();
+            }
+        }
+
+        public IEnumerable<FeedBackGetModel> GetAllFeedBack(int userId)
+        {
+            List<FeedBackGetModel> getFeedback = new List<FeedBackGetModel>();
+            try
+            {
+                connection = new SqlConnection(this.configuration.GetConnectionString("DBConnection"));
+                connection.Open();
+                SqlCommand command = new SqlCommand("Get_Feedback", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@UserId", userId);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        FeedBackGetModel model = new FeedBackGetModel();
+                        model.FeedBackId = Convert.ToInt32(reader["FeedBackId"]);
+                        model.Rating = Convert.ToInt32(reader["Rating"]);
+                        model.Comment = reader["Comment"].ToString();
+                        model.BookId = Convert.ToInt32(reader["BookId"]);
+
+                        getFeedback.Add(model);
+                    }
+                    return getFeedback;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
             }
         }
     }

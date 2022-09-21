@@ -15,3 +15,10 @@ AS
 BEGIN
 INSERT INTO FeedBack VALUES(@Rating, @Comment, @UserId, @BookId)
 END
+
+GO
+CREATE PROCEDURE Get_Feedback @UserId INT
+AS
+BEGIN
+SELECT * FROM FeedBack WHERE UserId = @UserId
+END

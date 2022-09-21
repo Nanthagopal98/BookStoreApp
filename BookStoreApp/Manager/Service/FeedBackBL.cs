@@ -26,5 +26,16 @@ namespace Manager.Service
                 throw;
             }
         }
+        public IEnumerable<FeedBackGetModel> GetAllFeedBack(int userId)
+        {
+            try
+            {
+                return feedBackRL.GetAllFeedBack(userId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }
