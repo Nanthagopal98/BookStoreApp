@@ -8,5 +8,6 @@ namespace Repository.Interface
     public interface IOrderRL
     {
         public bool PlaceOrder(OrderModel orderModel);
+        public bool CancelOrder(int orderId, int UserId);
     }
 }

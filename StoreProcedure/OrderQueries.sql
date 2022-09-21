@@ -46,3 +46,11 @@ END CATCH
 GO
 
 exec Place_Order 5,1,'Sep 21 2022 10:10AM'
+
+
+GO
+ALTER PROCEDURE Cancel_Order @orderId INT, @UserId INT
+AS
+BEGIN
+DELETE FROM TrackOrder WHERE OrderId = @orderId AND UserId = @UserId
+END

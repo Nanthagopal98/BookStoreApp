@@ -28,5 +28,16 @@ namespace Manager.Service
                 throw;
             }
         }
+        public bool CancelOrder(int orderId, int UserId)
+        {
+            try
+            {
+                return orderRL.CancelOrder(orderId, UserId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

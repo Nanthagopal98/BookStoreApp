@@ -47,5 +47,35 @@ namespace Repository.Service
                 connection.Close();
             }
         }
+
+        public bool CancelOrder(int orderId, int UserId)
+        {
+            try
+            {
+                connection = new SqlConnection(this.configuration.GetConnectionString("DBConnection"));
+                connection.Open();
+                SqlCommand command = new SqlCommand("Cancel_Order", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@orderId", orderId);
+                command.Parameters.AddWithValue("@UserId", UserId);
+                var result = command.ExecuteNonQuery();
+                if(result > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }

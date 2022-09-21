@@ -8,5 +8,6 @@ namespace Manager.Interface
     public interface IOrderBL
     {
         public bool PlaceOrder(OrderModel orderModel);
+        public bool CancelOrder(int orderId, int UserId);
     }
 }
