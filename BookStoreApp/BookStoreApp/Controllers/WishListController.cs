@@ -43,12 +43,12 @@ namespace BookStoreApp.Controllers
 
         [HttpDelete]
         [Route("DeleteWishList")]
-        public IActionResult DeleteWishList(int wishListId)
+        public IActionResult DeleteWishList(int bookId)
         {
             try
             {
                 var UserId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "Id").Value);
-                var result = wishListBL.DeleteWishList(UserId, wishListId);
+                var result = wishListBL.DeleteWishList(UserId, bookId);
                 if(result != false)
                 {
                     return Ok(new { success = true, message = "Deleted Successfully" });

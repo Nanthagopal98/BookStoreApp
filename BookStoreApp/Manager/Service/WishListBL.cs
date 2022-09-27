@@ -29,11 +29,11 @@ namespace Manager.Service
             }
         }
 
-        public bool DeleteWishList(int userId, int wishListId)
+        public bool DeleteWishList(int userId, int bookId)
         {
             try
             {
-                return wishListRL.DeleteWishList(userId, wishListId);
+                return wishListRL.DeleteWishList(userId, bookId);
             }
             catch
             {

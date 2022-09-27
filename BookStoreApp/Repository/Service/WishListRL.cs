@@ -79,7 +79,7 @@ namespace Repository.Service
             }
         }
 
-        public bool DeleteWishList(int userId, int wishListId)
+        public bool DeleteWishList(int userId, int bookId)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace Repository.Service
                 connection.Open();
                 SqlCommand command = new SqlCommand("Delete_Book_WishList", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@WishListId", wishListId);
+                command.Parameters.AddWithValue("@bookId", bookId);
                 command.Parameters.AddWithValue("@UserId", userId);
                 var result = command.ExecuteNonQuery();
                 if(result > 0)

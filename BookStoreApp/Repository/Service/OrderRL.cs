@@ -77,5 +77,44 @@ namespace Repository.Service
                 connection.Close();
             }
         }
+
+        public IEnumerable<GetOrderModel> GetOrder( int UserId)
+        {
+            try
+            {
+                List<GetOrderModel> result = new List<GetOrderModel>();
+                connection = new SqlConnection(this.configuration.GetConnectionString("DBConnection"));
+                connection.Open();
+                SqlCommand command = new SqlCommand("Get_Order", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@UserId", UserId);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        GetOrderModel model = new GetOrderModel();
+                        model.OrderId = Convert.ToInt32(reader["OrderId"]);
+                        model.BookId = Convert.ToInt32(reader["BookId"]);
+                        model.DateTime = reader["DateTime"].ToString();
+
+                        result.Add(model);
+                    }
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }

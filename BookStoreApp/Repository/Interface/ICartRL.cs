@@ -9,7 +9,7 @@ namespace Repository.Interface
     {
         public bool AddToCart(int UserId, CartModel cartModel);
         public bool UpdateCart(int userId, CartUpdateModel cartUpdateModel);
-        public bool DeleteCart(int cartId, int userId);
+        public bool DeleteCart(int bookId, int userId);
         public List<CartGet> GetCart(int userId);
     }
 }

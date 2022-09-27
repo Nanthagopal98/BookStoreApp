@@ -39,5 +39,16 @@ namespace Manager.Service
                 throw;
             }
         }
+        public IEnumerable<GetOrderModel> GetOrder(int UserId)
+        {
+            try
+            {
+                return orderRL.GetOrder(UserId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

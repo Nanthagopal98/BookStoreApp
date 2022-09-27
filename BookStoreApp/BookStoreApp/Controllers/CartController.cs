@@ -64,12 +64,12 @@ namespace BookStoreApp.Controllers
 
         [HttpDelete]
         [Route("DeleteCart")]
-        public IActionResult DeleteCart(int cartId)
+        public IActionResult DeleteCart(int bookId)
         {
             try
             {
                 var UserId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "Id").Value);
-                var result = CartBL.DeleteCart(cartId, UserId);
+                var result = CartBL.DeleteCart(bookId, UserId);
                 if(result != false)
                 {
                     return Ok(new { succcess = true, message = "Cart Delete Success" });

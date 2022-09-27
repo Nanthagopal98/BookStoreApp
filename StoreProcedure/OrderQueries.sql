@@ -54,3 +54,10 @@ AS
 BEGIN
 DELETE FROM TrackOrder WHERE OrderId = @orderId AND UserId = @UserId
 END
+
+GO
+CREATE PROCEDURE Get_Order @UserId INT
+AS
+BEGIN
+SELECT * FROM TrackOrder WHERE UserId = @UserId
+END

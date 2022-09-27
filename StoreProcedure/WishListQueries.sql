@@ -16,10 +16,10 @@ END
 
 
 GO
-CREATE PROCEDURE [dbo].[Delete_Book_WishList] @WishListId INT , @UserId INT
+ALTER PROCEDURE [dbo].[Delete_Book_WishList] @bookId INT , @UserId INT
 AS
 BEGIN
-DELETE FROM WishList WHERE WishListId = @WishListId AND UserId = @UserId
+DELETE FROM WishList WHERE BookId = @bookId AND UserId = @UserId
 END
 
 GO

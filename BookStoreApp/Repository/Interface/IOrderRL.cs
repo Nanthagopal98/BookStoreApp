@@ -9,5 +9,6 @@ namespace Repository.Interface
     {
         public bool PlaceOrder(OrderModel orderModel);
         public bool CancelOrder(int orderId, int UserId);
+        public IEnumerable<GetOrderModel> GetOrder(int UserId);
     }
 }

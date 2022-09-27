@@ -32,10 +32,10 @@ UPDATE Cart SET Quantity = @Quantity WHERE CartId = @CartId AND UserId = @UserId
 END
 
 GO
-CREATE PROCEDURE [dbO].[Delete_Cart] @CartId INT, @UserId INT
+ALTER PROCEDURE [dbO].[Delete_Cart] @BookId INT, @UserId INT
 AS
 BEGIN
-DELETE FROM Cart WHERE CartId = @CartId AND UserId = @UserId
+DELETE FROM Cart WHERE BookId = @BookId AND UserId = @UserId
 END
 
 GO

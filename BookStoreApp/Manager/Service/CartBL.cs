@@ -39,11 +39,11 @@ namespace Manager.Service
             }
         }
 
-        public bool DeleteCart(int cartId, int userId)
+        public bool DeleteCart(int bookId, int userId)
         {
             try
             {
-                return cartRL.DeleteCart(cartId, userId);
+                return cartRL.DeleteCart(bookId, userId);
             }
             catch
             {

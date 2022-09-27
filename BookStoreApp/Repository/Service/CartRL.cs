@@ -163,7 +163,7 @@ namespace Repository.Service
             }
         }
 
-        public bool DeleteCart(int cartId, int userId)
+        public bool DeleteCart(int bookId, int userId)
         {
             try
             {
@@ -171,7 +171,7 @@ namespace Repository.Service
                 connection.Open();
                 SqlCommand cmd = new SqlCommand("Delete_Cart", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@CartId", cartId);
+                cmd.Parameters.AddWithValue("@BookId", bookId);
                 cmd.Parameters.AddWithValue("@UserId", userId);
                 var result = cmd.ExecuteNonQuery();
                 if(result > 0)

@@ -60,5 +60,26 @@ namespace BookStoreApp.Controllers
                 throw;
             }
         }
+
+        [HttpGet]
+        [Route("getOrder")]
+        public IActionResult GetOrder()
+        {
+            try
+            {
+                var UserId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "Id").Value);
+                var result = orderBL.GetOrder( UserId);
+                if (result != null)
+                {
+                    return Ok(new { succcess = true, message = "Cancel Order Success", data = result });
+                }
+                return BadRequest(new { success = false, message = "Cancel Order Failed" });
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
