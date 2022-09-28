@@ -62,6 +62,45 @@ namespace Repository.Service
                 }
             }
         }
+        public GetAdminModel GetAdmin()
+        {
+
+            sqlConnection = new SqlConnection(this.Configuration.GetConnectionString("DBConnection"));
+            using (sqlConnection)
+            {
+                try
+                {
+                    GetAdminModel getAdminModel = new GetAdminModel();
+                    SqlCommand command = new SqlCommand("Get_Admin", sqlConnection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    sqlConnection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            
+                            getAdminModel.AdminEmailID = reader["AdminEmailID"].ToString();
+                            getAdminModel.AdminPhone = reader["AdminPhone"].ToString();
+                            getAdminModel.Address = reader["Address"].ToString();
+                        }
+                        return getAdminModel;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                }
+            }
+        }
         public string GenerateSecurityToken(string email, int Id)
         {
             var tokenHandler = new JwtSecurityTokenHandler();

@@ -37,5 +37,27 @@ namespace BookStoreApp.Controllers
                 throw;
             }
         }
+
+        [HttpGet]
+        [Route("getAdmin")]
+        public IActionResult GetAdmin()
+        {
+            try
+            {
+                var result = this.iAdminBL.GetAdmin();
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "Get Admin Successful", data = result });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "Get Admin Failed" });
+                }
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 }

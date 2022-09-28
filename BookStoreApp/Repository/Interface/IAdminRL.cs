@@ -8,5 +8,6 @@ namespace Repository.Interface
     public interface IAdminRL
     {
         public string AdminLogin(LoginModel loginModel);
+        public GetAdminModel GetAdmin();
     }
 }

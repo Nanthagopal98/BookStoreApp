@@ -26,5 +26,17 @@ namespace Manager.Service
                 throw;
             }
         }
+
+        public GetAdminModel GetAdmin()
+        {
+            try
+            {
+                return iAdminRL.GetAdmin();
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

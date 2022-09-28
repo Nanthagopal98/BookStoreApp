@@ -22,3 +22,10 @@ AS
 BEGIN
 SELECT AdminEmailID,Password FROM Admin WHERE AdminEmailID= @Email AND Password=@Password
 END
+
+GO
+CREATE PROCEDURE [dbo].[Get_Admin]
+AS
+BEGIN
+select * from Admin
+END

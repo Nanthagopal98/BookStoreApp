@@ -8,5 +8,6 @@ namespace Manager.Interface
     public interface IAdminBL
     {
         public string AdminLogin(LoginModel loginModel);
+        public GetAdminModel GetAdmin( );
     }
 }
