@@ -17,8 +17,10 @@ INSERT INTO FeedBack VALUES(@Rating, @Comment, @UserId, @BookId)
 END
 
 GO
-CREATE PROCEDURE Get_Feedback @UserId INT
+ALTER PROCEDURE Get_Feedback @BookId INT
 AS
 BEGIN
-SELECT * FROM FeedBack WHERE UserId = @UserId
+SELECT Rating, Comment, UserName FROM FeedBack AS FB INNER JOIN Users AS UR ON FB.UserId = UR.UserId WHERE BookId = @BookId
 END
+
+

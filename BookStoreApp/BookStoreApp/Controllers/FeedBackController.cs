@@ -43,12 +43,11 @@ namespace BookStoreApp.Controllers
         }
         [HttpGet]
         [Route("GetAllFeedback")]
-        public IActionResult GetCart()
+        public IActionResult GetFeedback(int bookId)
         {
             try
             {
-                var UserId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "Id").Value);
-                var result = feedBackBL.GetAllFeedBack(UserId);
+                var result = feedBackBL.GetAllFeedBack(bookId);
                 if (result != null)
                 {
                     return Ok(new { succcess = true, message = "Get feedback Success", data = result });

@@ -26,11 +26,11 @@ namespace Manager.Service
                 throw;
             }
         }
-        public IEnumerable<FeedBackGetModel> GetAllFeedBack(int userId)
+        public IEnumerable<FeedBackGetModel> GetAllFeedBack(int bookId)
         {
             try
             {
-                return feedBackRL.GetAllFeedBack(userId);
+                return feedBackRL.GetAllFeedBack(bookId);
             }
             catch
             {

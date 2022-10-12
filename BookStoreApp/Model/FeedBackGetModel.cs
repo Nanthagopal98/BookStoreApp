@@ -10,5 +10,6 @@ namespace Model
         public int Rating { get; set; }
         public string Comment { get; set; }
         public int BookId { get; set; }
+        public string UserName { get; set; }
     }
 }

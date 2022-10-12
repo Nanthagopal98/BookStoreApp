@@ -14,6 +14,8 @@ Address varchar(300)
 
 INSERT INTO Admin VALUES('Natha','Nantha@gmail.com','9874561230','123456','My Address')
 
+UPDATE Admin SET Address = '1/100, ABC Sttreet, Coimbatore, Tamilnadu - 641048'
+
 select * from Admin
 
 GO
