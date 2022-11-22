@@ -34,9 +34,9 @@ namespace BookStoreApp.Controllers
                 {
                     return Ok(new { success = true, message = "Added To Cart" });
                 }
-                return BadRequest(new { success = false, meassage = "Failed To add To Cart" });
+                return BadRequest(new { success = false, meassage = "Book Already Added in Cart" });
             }
-            catch(System.Exception)
+            catch(System.Exception) 
             {
                 throw;
             }

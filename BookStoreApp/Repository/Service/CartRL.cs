@@ -199,17 +199,32 @@ namespace Repository.Service
                 connection.Open();
                 SqlCommand command = new SqlCommand("Get_Procedure", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@UserId", userId);
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        CartGet model = new CartGet();
-                        model.CartId = Convert.ToInt32(reader["CartId"]);
-                        model.BookId = Convert.ToInt32(reader["BookId"]);
-                        model.Quantity = Convert.ToInt32(reader["Quantity"]);
-                        getCart.Add(model);
+                        int idCheck = Convert.ToInt32(reader["UserId"]);
+                        if (idCheck == userId) {
+                            CartGet model = new CartGet();
+                            model.CartId = Convert.ToInt32(reader["CartId"]);
+                            model.BookId = Convert.ToInt32(reader["BookId"]);
+                            model.Quantity = Convert.ToInt32(reader["Quantity"]);
+                            model.BookName = reader["BookName"].ToString();
+                            model.AuthorName = reader["AuthorName"].ToString();
+                            model.Rating = reader["Rating"].ToString();
+                            model.TotalRating = Convert.ToInt32(reader["TotalRating"]);
+                            model.DiscountPrice = reader["DiscountPrice"].ToString();
+                            model.ActualPrice = reader["ActualPrice"].ToString();
+                            model.Description = reader["Description"].ToString();
+                            model.BookImage = reader["BookImage"].ToString();
+                            model.BookQuantity = Convert.ToInt32(reader["BookQuantity"]);
+                            getCart.Add(model);
+                        }
+                        else
+                        {
+                            continue;
+                        }
                     }
                     return getCart;
                 }

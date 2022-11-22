@@ -33,7 +33,7 @@ namespace Repository.Service
                 command.Parameters.AddWithValue("@DateTime", orderModel.DateTime);
                 var result = command.ExecuteNonQuery();
                 if(result > 0)
-                {
+                { 
                     return true;
                 }
                 return false;

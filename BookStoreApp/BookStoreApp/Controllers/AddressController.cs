@@ -8,6 +8,7 @@ using System;
 using Experimental.System.Messaging;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.Logging;
 
 namespace BookStoreApp.Controllers
 {
@@ -17,10 +18,11 @@ namespace BookStoreApp.Controllers
     public class AddressController : ControllerBase
     {
         private readonly IAddressBL addressBL;
-
-        public AddressController(IAddressBL addressBL)
+        private readonly ILogger<AddressController> logger;
+        public AddressController(IAddressBL addressBL, ILogger<AddressController> logger)
         {
             this.addressBL = addressBL;
+            this.logger = logger;
         }
 
         [HttpPost]

@@ -1,6 +1,7 @@
 ﻿using Manager.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Model;
 using System.Security.Claims;
 
@@ -11,10 +12,12 @@ namespace BookStoreApp.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserBL iUserBl;
+        private readonly ILogger<UserController> logger;
 
-        public UserController(IUserBL iUserBl)
+        public UserController(IUserBL iUserBl, ILogger<UserController> logger)
         {
             this.iUserBl = iUserBl;
+            this.logger = logger;
         }
 
         [HttpPost]

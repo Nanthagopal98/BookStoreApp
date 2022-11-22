@@ -38,7 +38,7 @@ namespace BookStoreApp.Controllers
             }
         }
 
-        [Authorize]
+        [Authorize(Roles = Role.Users)]
         [HttpGet]
         [Route("GetAllBooks")]
         public IActionResult GetAllBooks()

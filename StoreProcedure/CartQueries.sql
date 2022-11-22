@@ -39,8 +39,15 @@ DELETE FROM Cart WHERE BookId = @BookId AND UserId = @UserId
 END
 
 GO
-CREATE PROCEDURE [dbo].[Get_Procedure] @UserId INT
+ALTER PROCEDURE [dbo].[Get_Procedure]
 AS
 BEGIN
-SELECT * FROM Cart WHERE UserId = @UserId
+SELECT * FROM BookAndCart
 END
+
+GO
+ALTER VIEW BookAndCart AS
+SELECT  BK.BookId,CartId,BookName,AuthorName,Rating,TotalRating,DiscountPrice,ActualPrice,Description,BookImage,BookQuantity,Quantity,UserId
+FROM Cart CT INNER JOIN Books BK ON CT.BookId = BK.BookId 
+
+SELECT * FROM BookAndCart
